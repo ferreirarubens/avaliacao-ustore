@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 /**
- * @author rubens.ferreira
+ * @author Ferreira Rubens <rubensdefrancaferreira@gmail.com>
  *
  */
 @Entity

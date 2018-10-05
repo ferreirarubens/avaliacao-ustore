@@ -25,10 +25,6 @@ import com.ferreirarubens.exceptions.StorageException;
 import com.ferreirarubens.model.Metadata;
 import com.ferreirarubens.repo.IMetadataRepository;
 
-/**
- * @author rubens.ferreira
- *
- */
 @Service
 public class StorageServiceImpl implements IStorageService {
 
@@ -44,12 +40,12 @@ public class StorageServiceImpl implements IStorageService {
 			throw new StorageException("Failed to create bucket " + bucketName);
 		}
 
-		File theDir = Paths.get(this.rootLocation, bucketName).toFile();
+		File dir = Paths.get(this.rootLocation, bucketName).toFile();
 
-		if (!theDir.exists()) {
+		if (!dir.exists()) {
 			boolean result = false;
 			try {
-				theDir.mkdir();
+				dir.mkdir();
 				result = true;
 			} catch (SecurityException se) {
 
@@ -124,11 +120,11 @@ public class StorageServiceImpl implements IStorageService {
 			if (resource.exists() || resource.isReadable()) {
 				return resource;
 			} else {
-				throw new StorageException("Could not read file: " + filename);
+				throw new StorageException("Error to read file: " + filename);
 
 			}
 		} catch (MalformedURLException e) {
-			throw new StorageException("Could not read file: " + filename, e);
+			throw new StorageException("Error read file: " + filename, e);
 		}
 	}
 

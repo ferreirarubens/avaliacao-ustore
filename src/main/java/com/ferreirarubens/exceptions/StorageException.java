@@ -1,9 +1,5 @@
 package com.ferreirarubens.exceptions;
 
-/**
- * @author rubens.ferreira
- *
- */
 public class StorageException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

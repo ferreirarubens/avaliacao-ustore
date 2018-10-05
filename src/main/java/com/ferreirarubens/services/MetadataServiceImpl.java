@@ -11,7 +11,7 @@ import com.ferreirarubens.model.Metadata;
 import com.ferreirarubens.repo.IMetadataRepository;
 
 /**
- * @author rubens.ferreira
+ * @author Ferreira Rubens <rubensdefrancaferreira@gmail.com>
  *
  */
 @Service
@@ -29,7 +29,12 @@ public class MetadataServiceImpl implements IMetadataService {
 	@Override
 	@Transactional(propagation = Propagation.NESTED)
 	public List<Metadata> findByBucketAndKeyValueMap(String bucket, String key, String value) {
-		return metadataRepository.findByMetaKey(key);
+		return metadataRepository.findByMetaKey(bucket, key, value);
+	}
+	
+	@Override
+	public Metadata save(Metadata metadata) {
+		return metadataRepository.save(metadata);
 	}
 
 }

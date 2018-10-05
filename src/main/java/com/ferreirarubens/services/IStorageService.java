@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ferreirarubens.model.Metadata;
 
 /**
- * @author rubens.ferreira
+ * @author Ferreira Rubens <rubensdefrancaferreira@gmail.com>
  *
  */
 public interface IStorageService {

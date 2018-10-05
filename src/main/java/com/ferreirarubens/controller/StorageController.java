@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,10 +21,11 @@ import com.ferreirarubens.services.IMetadataService;
 import com.ferreirarubens.services.IStorageService;
 
 /**
- * @author rubens.ferreira
+ * @author Ferreira Rubens <rubensdefrancaferreira@gmail.com>
  *
  */
 @RestController
+@RequestMapping("/storage")
 public class StorageController {
 
 	@Autowired
@@ -32,20 +34,14 @@ public class StorageController {
 	@Autowired
 	private IMetadataService metadataService;
 
-	@PostMapping("/bucket/{name}")
-	public ResponseEntity<String> createBucket(@PathVariable String name) {
-		storageService.createBucket(name);
-		return new ResponseEntity<String>("Bucket created " + name, HttpStatus.OK);
-	}
-
 	@PostMapping("/{bucket}")
-	public ResponseEntity<Metadata> fileUploadBucket(@RequestParam("file") MultipartFile file,
+	public ResponseEntity<Metadata> uploadFile(@RequestParam("file") MultipartFile file,
 			@PathVariable String bucket) {
 		return new ResponseEntity<Metadata>(storageService.save(bucket, file), HttpStatus.OK);
 	}
 
 	@PostMapping("/{bucket}/{filename}")
-	public ResponseEntity<Metadata> fileUploadBucketFilename(@RequestParam("file") MultipartFile file,
+	public ResponseEntity<Metadata> uploadFileName(@RequestParam("file") MultipartFile file,
 			@PathVariable String bucket, @PathVariable String filename) {
 		return new ResponseEntity<>(storageService.save(bucket, file, filename), HttpStatus.OK);
 	}
@@ -61,9 +57,9 @@ public class StorageController {
 				.body(file);
 	}
 	
-	@PutMapping("/{bucket}/update/{filename}")
+	@PutMapping("/{bucket}")
 	public ResponseEntity<Metadata> fileUpdateBucket(@RequestParam("file") MultipartFile file,
-			@PathVariable String bucket, @PathVariable String filename) {
+			@PathVariable String bucket, @RequestParam("filename") String filename) {
 		if(filename.isEmpty()) {
 			throw new StorageException("File name is required");
 		}

@@ -22,7 +22,7 @@ import com.ferreirarubens.model.Metadata;
 import com.ferreirarubens.services.IMetadataService;
 
 /**
- * @author rubens.ferreira
+ * @author Ferreira Rubens <rubensdefrancaferreira@gmail.com>
  *
  */
 @RestController
@@ -50,12 +50,12 @@ public class MetadataController {
 				.entrySet().forEach(entry -> {
 					metadata.getMeta().put(entry.getKey(), entry.getValue().get(0));
 				});
-		return ResponseEntity.ok().body(metadata);
+		return ResponseEntity.ok().body(metadataService.save(metadata));
 	}
 
-	@PostMapping("/{bucket}/meta/{meta}")
+	@PostMapping("/{bucket}")
 	@ResponseBody
-	public ResponseEntity<List<String>> serveFile(@PathVariable String bucket, @PathVariable String meta,
+	public ResponseEntity<List<String>> serveFile(@PathVariable String bucket, @RequestParam("metadata") String meta,
 			@RequestParam("value") String value) {
 
 		return ResponseEntity.ok().body(metadataService.findByBucketAndKeyValueMap(bucket, meta, value).stream()
