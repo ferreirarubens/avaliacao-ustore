@@ -4,10 +4,11 @@
 package com.ferreirarubens.services;
 
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.ferreirarubens.model.Metadata;
 
 /**
  * @author rubens.ferreira
@@ -15,15 +16,17 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface IStorageService {
 	
-	void init();
+	void start();
+	
+	void createBucket(String bucketName);
 
-	void save(MultipartFile file);
+	Metadata save(String bucketName, MultipartFile file);
+	
+	Metadata save(String bucketName, MultipartFile file, String filename);
 
-	Stream<Path> loadAll();
+	Path load(String bucket, String filename);
 
-	Path load(String filename);
-
-	Resource loadAsResource(String filename);
+	Resource getResource(String bucket, String filename);
 
 	void deleteAll();
 }
