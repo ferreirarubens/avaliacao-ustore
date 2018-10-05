@@ -2,6 +2,10 @@
 
 Foi construída uma API de Object Storage utilizando o framework Spring Boot, seguindo ao máximo os requisitos da documentação solicitada.
 
+# URL PROJETO
+Foi feito o deploy na plataforma web heroku, para que possam ser feitos os testes.
+Link base da aplicação: https://avaliacao-ustore.herokuapp.com
+
 # documentação API Rest
 No link abaixo há uma documentação na ferramenta Postman referente às requisições rest necessárias para acesso.
 https://documenter.getpostman.com/view/5365597/RWgnXKt1
